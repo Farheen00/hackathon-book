@@ -1,0 +1,8 @@
+{
+  "label": "Chapter 3: Humanoid Robot URDF",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "Learn to understand and author URDF for humanoid robots: Structure, Joints, Links."
+  }
+}

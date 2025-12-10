@@ -1,0 +1,57 @@
+# Isaac ROS VSLAM Configuration Example
+# Configuration for Visual SLAM with hardware acceleration
+
+vslam_node:
+  ros__parameters:
+    # Camera parameters
+    camera_matrix: [616.272, 0.0, 310.559, 0.0, 616.062, 229.153, 0.0, 0.0, 1.0]
+    distortion_coefficients: [-0.41562, 0.174405, 0.0014309, 0.00109547, 0.0]
+
+    # Processing parameters
+    enable_rectification: true
+    processing_rate: 30.0
+
+    # Hardware acceleration
+    use_cuda: true
+    cuda_device_id: 0
+
+    # Performance parameters
+    max_features: 1000
+    min_feature_distance: 10.0
+    tracking_threshold: 20.0
+
+    # Map parameters
+    map_size: 100.0
+    map_resolution: 0.05
+    enable_loop_closure: true
+    loop_closure_threshold: 0.1
+
+    # Pose estimation
+    pose_publish_rate: 100.0
+    enable_6dof_tracking: true
+
+perception_pipeline:
+  ros__parameters:
+    # Processing parameters
+    image_width: 640
+    image_height: 480
+    processing_rate: 30.0
+
+    # Component enable flags
+    enable_object_detection: true
+    enable_segmentation: true
+    enable_depth_estimation: true
+
+    # Performance settings
+    max_queue_size: 10
+    enable_async_processing: true
+
+bipedal_local_planner:
+  ros__parameters:
+    use_sim_time: true
+    # Bipedal-specific constraints
+    balance_margin: 0.15  # Safety margin for bipedal balance
+    step_size_max: 0.3    # Maximum step size
+    step_height_max: 0.1  # Maximum step height
+    stance_width: 0.2     # Distance between feet in stance phase
+    gait_type: "walking"  # Walking gait for stability

@@ -1,0 +1,25 @@
+# ROS 2 Node Architecture Diagram
+
+## Description
+This diagram illustrates the architecture and communication patterns of ROS 2 nodes.
+
+## Visual Elements
+1. **Central Node Box**: A rectangular box labeled "ROS 2 Node" in the center
+2. **rclpy Layer**: A horizontal band above the node labeled "rclpy (Python Client Library)"
+3. **Node Components**: Inside the central box:
+   - "Node Class" - main class definition
+   - "Publishers" - multiple publisher objects
+   - "Subscribers" - multiple subscriber objects
+   - "Services" - service server/client objects
+   - "Timers" - timer callback objects
+4. **Communication Arrows**:
+   - Bidirectional arrows connecting to "Topics" (bubbles labeled "Topic A", "Topic B")
+   - Bidirectional arrows connecting to "Services" (bubbles labeled "Service 1", "Service 2")
+5. **External Nodes**: Other node boxes showing similar structure, connected via topics and services
+6. **DDS Layer**: Bottom layer showing "DDS (Data Distribution Service)" with connections to all nodes
+
+## Key Relationships
+- rclpy acts as the interface between Python code and ROS 2 middleware
+- Nodes communicate through topics (publish/subscribe) and services (request/response)
+- All communication goes through the DDS layer for distribution
+- Nodes are independent processes that can run on different machines

@@ -1,0 +1,48 @@
+# rclpy Architecture Diagram
+
+## Description
+This diagram shows the architecture of the rclpy Python client library and its relationship to the ROS 2 ecosystem.
+
+## Visual Elements
+1. **Top Layer - Python Application**:
+   - "User Python Code" box containing:
+     - Node definitions
+     - Publisher/Subscriber logic
+     - Service/Client implementations
+     - Parameter handling
+
+2. **Middle Layer - rclpy**:
+   - "rclpy" box with sub-components:
+     - "Node" class
+     - "Publisher" class
+     - "Subscriber" class
+     - "Client" class
+     - "Service" class
+     - "Timer" class
+     - "Parameter" interface
+
+3. **Lower Middle Layer - rcl**:
+   - "rcl (ROS Client Library)" box
+   - Common C library interface
+   - Language-agnostic ROS concepts
+
+4. **Bottom Layer - DDS**:
+   - "DDS Implementation" box (e.g., Fast DDS, Cyclone DDS)
+   - Middleware layer handling message distribution
+
+5. **Inter-layer Connections**:
+   - Python API calls to rclpy functions
+   - rclpy calls to rcl functions
+   - rcl calls to DDS functions
+   - Bidirectional arrows showing data flow
+
+6. **Integration Elements**:
+   - "Other Language Clients" (C++, etc.) showing parallel architecture
+   - "ROS 2 Ecosystem" showing integration with other ROS 2 tools
+
+## Key Relationships
+- rclpy provides Python-specific interface to ROS 2
+- rcl serves as common C layer for all language clients
+- DDS provides underlying message distribution
+- rclpy handles Python-specific concerns like garbage collection
+- Architecture maintains separation between Python interface and underlying C implementations

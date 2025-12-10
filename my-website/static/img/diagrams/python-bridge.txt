@@ -1,0 +1,48 @@
+# Python-ROS Bridge Architecture Diagram
+
+## Description
+This diagram illustrates the integration architecture between Python AI agents and ROS 2 controllers.
+
+## Visual Elements
+1. **Left Section - Python AI Agent**:
+   - "AI Algorithm" box (e.g., neural network, decision tree, reinforcement learning)
+   - "Data Processing" module
+   - "Decision Making" module
+   - "Sensor Data Processing" module
+
+2. **Middle Section - Bridge Interface**:
+   - "Python-ROS Bridge" box containing:
+     - "rclpy Node"
+     - "Message Converters"
+     - "State Management"
+     - "Callback Handlers"
+
+3. **Right Section - ROS 2 System**:
+   - "ROS 2 Controllers" box containing:
+     - "Motion Controller"
+     - "Sensor Interface"
+     - "Actuator Interface"
+     - "Robot Hardware"
+
+4. **Communication Channels**:
+   - "Sensor Topics" (e.g., /scan, /camera/image_raw, /imu/data)
+   - "Control Topics" (e.g., /cmd_vel, /joint_commands)
+   - "Service Calls" (e.g., /move_to_pose, /get_robot_state)
+   - Bidirectional arrows showing data flow
+
+5. **Data Flow Examples**:
+   - Sensor data flowing from ROS to Python AI
+   - Control commands flowing from Python AI to ROS
+   - Feedback loops for closed-loop control
+
+6. **Integration Points**:
+   - "Perception Pipeline" connecting sensor data to AI
+   - "Action Selection" from AI to control commands
+   - "Learning Component" with experience replay buffer
+
+## Key Relationships
+- Python AI processes sensor data and makes decisions
+- Bridge converts between Python data structures and ROS messages
+- ROS controllers execute commands on physical/virtual robot
+- Real-time constraints maintained through proper message handling
+- Safety layers ensure safe operation between AI and robot

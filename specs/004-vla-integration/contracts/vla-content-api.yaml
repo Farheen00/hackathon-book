@@ -1,0 +1,320 @@
+openapi: 3.0.0
+info:
+  title: VLA Content API
+  description: API for accessing Vision-Language-Action educational content with section IDs for chatbot retrieval
+  version: 1.0.0
+servers:
+  - url: https://api.your-book-domain.com/v1
+    description: Production server
+
+paths:
+  /content/module/{moduleId}:
+    get:
+      summary: Get content for a specific module
+      parameters:
+        - name: moduleId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "004-vla-integration"
+          description: The module identifier
+      responses:
+        '200':
+          description: Module content retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  moduleId:
+                    type: string
+                  title:
+                    type: string
+                  chapters:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Chapter'
+        '404':
+          description: Module not found
+
+  /content/chapter/{chapterId}:
+    get:
+      summary: Get content for a specific chapter
+      parameters:
+        - name: chapterId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "ch4-whisper-v2a"
+          description: The chapter identifier
+      responses:
+        '200':
+          description: Chapter content retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Chapter'
+        '404':
+          description: Chapter not found
+
+  /content/section/{sectionId}:
+    get:
+      summary: Get content for a specific section
+      parameters:
+        - name: sectionId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "ch4-s1-whisper-integration"
+          description: The section identifier
+      responses:
+        '200':
+          description: Section content retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Section'
+        '404':
+          description: Section not found
+
+  /content/vla-example/{exampleId}:
+    get:
+      summary: Get VLA example content
+      parameters:
+        - name: exampleId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "whisper-command-recognition"
+          description: The VLA example identifier
+      responses:
+        '200':
+          description: VLA example content retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VLAExample'
+        '404':
+          description: VLA example not found
+
+  /content/vla-integration/{integrationId}:
+    get:
+      summary: Get VLA integration content
+      parameters:
+        - name: integrationId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "complete-vla-workflow"
+          description: The VLA integration identifier
+      responses:
+        '200':
+          description: VLA integration content retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VLAIntegration'
+        '404':
+          description: VLA integration not found
+
+components:
+  schemas:
+    Chapter:
+      type: object
+      required:
+        - id
+        - title
+        - content
+        - sections
+      properties:
+        id:
+          type: string
+          description: Unique chapter identifier for chatbot retrieval
+        title:
+          type: string
+          description: Chapter title
+        content:
+          type: string
+          description: Chapter overview content in Markdown
+        sections:
+          type: array
+          items:
+            $ref: '#/components/schemas/Section'
+        learningOutcomes:
+          type: array
+          items:
+            type: string
+          description: What students should learn from this chapter
+        vlaExamples:
+          type: array
+          items:
+            $ref: '#/components/schemas/VLAExample'
+
+    Section:
+      type: object
+      required:
+        - id
+        - title
+        - content
+      properties:
+        id:
+          type: string
+          description: Unique section identifier for chatbot retrieval
+        title:
+          type: string
+          description: Section title
+        content:
+          type: string
+          description: Section content in Markdown format
+        diagramDescriptions:
+          type: array
+          items:
+            type: string
+          description: Text descriptions of diagrams in the section
+        keyConcepts:
+          type: array
+          items:
+            type: string
+          description: Important concepts covered in the section
+
+    VLAExample:
+      type: object
+      required:
+        - id
+        - title
+        - type
+        - description
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the VLA example
+        title:
+          type: string
+          description: Brief description of the example
+        type:
+          type: string
+          description: Type of VLA example
+          enum: [whisper, cognitive-planning, integration, capstone]
+        description:
+          type: string
+          description: Explanation of what the VLA example demonstrates
+        expectedOutput:
+          type: string
+          description: What the VLA example should produce when run
+        prerequisites:
+          type: array
+          items:
+            type: string
+          description: What needs to be set up before running
+        files:
+          type: array
+          items:
+            type: string
+          description: List of files that make up the VLA example
+        setupInstructions:
+          type: string
+          description: Step-by-step setup instructions
+
+    VLAIntegration:
+      type: object
+      required:
+        - name
+        - components
+        - workflow
+      properties:
+        name:
+          type: string
+          description: Name of the integration example
+        components:
+          type: array
+          items:
+            type: string
+          description: List of VLA components involved
+        workflow:
+          type: object
+          description: Complete workflow from voice input to robot action
+        validationMetrics:
+          type: object
+          description: Metrics for measuring success
+        failureModes:
+          type: array
+          items:
+            type: object
+          description: Potential failure scenarios and recovery
+
+    VoiceCommand:
+      type: object
+      required:
+        - transcription
+        - intent
+        - confidence
+      properties:
+        transcription:
+          type: string
+          description: The recognized text from Whisper
+        intent:
+          type: string
+          description: The interpreted purpose of the command
+        confidence:
+          type: number
+          description: Confidence score of the recognition (0-1)
+        timestamp:
+          type: number
+          description: When the command was captured
+        processingResult:
+          type: object
+          description: Result of natural language processing
+
+    CognitivePlan:
+      type: object
+      required:
+        - sequenceId
+        - steps
+        - inputCommand
+      properties:
+        sequenceId:
+          type: string
+          description: Identifier for the action sequence
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/CognitiveStep'
+        inputCommand:
+          type: string
+          description: Original natural language command
+        parsedStructure:
+          type: object
+          description: Structured representation of the command
+        executionContext:
+          type: object
+          description: Environment and robot state context
+
+    CognitiveStep:
+      type: object
+      required:
+        - stepId
+        - actionType
+        - parameters
+      properties:
+        stepId:
+          type: string
+          description: Unique identifier for the step
+        actionType:
+          type: string
+          description: Type of ROS 2 action (service call, topic publish, action goal)
+        parameters:
+          type: object
+          description: Parameters for the action
+        dependencies:
+          type: array
+          items:
+            type: string
+          description: Other steps this step depends on
+        estimatedDuration:
+          type: number
+          description: Expected time to execute (seconds)

@@ -1,0 +1,8 @@
+{
+  "label": "Module 4 – Vision-Language-Action (VLA)",
+  "position": 7,
+  "link": {
+    "type": "generated-index",
+    "description": "Learn about integrating LLMs with robotics for autonomous humanoids."
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "label": "Module 1 – The Robotic Nervous System (ROS 2)",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Learn the core ROS 2 middleware concepts: Nodes, Topics, Services, and how to bridge Python agents to ROS controllers."
+  }
+}

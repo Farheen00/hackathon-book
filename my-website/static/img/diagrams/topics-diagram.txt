@@ -1,0 +1,32 @@
+# ROS 2 Topics Communication Diagram
+
+## Description
+This diagram shows the publish-subscribe communication pattern in ROS 2 using topics.
+
+## Visual Elements
+1. **Publisher Node**: Left-side box labeled "Publisher Node" containing:
+   - "Publisher Object"
+   - Arrow pointing to topic
+   - Message creation process
+
+2. **Topic Channel**: Central oval/cylinder shape labeled "Topic: /chatter"
+
+3. **Subscriber Nodes**: Right-side boxes labeled "Subscriber Node 1" and "Subscriber Node 2", each containing:
+   - "Subscriber Object"
+   - Arrow from topic to subscriber
+   - Message processing
+
+4. **Message Flow**:
+   - Arrow from Publisher to Topic (labeled "Message: Hello World #N")
+   - Arrows from Topic to each Subscriber (same message content)
+   - Timing indicators showing asynchronous communication
+
+5. **DDS Infrastructure**: Background layer showing the middleware that handles message distribution
+
+## Key Relationships
+- One publisher can send messages to multiple subscribers
+- Subscribers receive messages without knowing the publisher identity
+- Publishers send messages without knowing subscriber identities
+- Communication is asynchronous and decoupled
+- Message types are standardized (e.g., std_msgs/String)
+- Quality of Service (QoS) settings can affect delivery guarantees

@@ -1,0 +1,302 @@
+openapi: 3.0.0
+info:
+  title: Isaac Content API
+  description: API for accessing Isaac Sim, Isaac ROS, and Nav2 educational content with section IDs for chatbot retrieval
+  version: 1.0.0
+servers:
+  - url: https://api.your-book-domain.com/v1
+    description: Production server
+
+paths:
+  /content/module/{moduleId}:
+    get:
+      summary: Get content for a specific module
+      parameters:
+        - name: moduleId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "003-isaac-ai-brain"
+          description: The module identifier
+      responses:
+        '200':
+          description: Module content retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  moduleId:
+                    type: string
+                  title:
+                    type: string
+                  chapters:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Chapter'
+        '404':
+          description: Module not found
+
+  /content/chapter/{chapterId}:
+    get:
+      summary: Get content for a specific chapter
+      parameters:
+        - name: chapterId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "ch3-isaac-sim"
+          description: The chapter identifier
+      responses:
+        '200':
+          description: Chapter content retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Chapter'
+        '404':
+          description: Chapter not found
+
+  /content/section/{sectionId}:
+    get:
+      summary: Get content for a specific section
+      parameters:
+        - name: sectionId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "ch3-s1-isaac-envs"
+          description: The section identifier
+      responses:
+        '200':
+          description: Section content retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Section'
+        '404':
+          description: Section not found
+
+  /content/simulation-example/{exampleId}:
+    get:
+      summary: Get simulation example content
+      parameters:
+        - name: exampleId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "isaac-sim-basic-office"
+          description: The simulation example identifier
+      responses:
+        '200':
+          description: Simulation example content retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimulationExample'
+        '404':
+          description: Simulation example not found
+
+  /content/isaac-sim/environment/{envId}:
+    get:
+      summary: Get Isaac Sim environment configuration
+      parameters:
+        - name: envId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "basic_office"
+          description: The environment identifier
+      responses:
+        '200':
+          description: Isaac Sim environment configuration retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IsaacSimEnvironment'
+        '404':
+          description: Environment not found
+
+  /content/isaac-ros/node/{nodeId}:
+    get:
+      summary: Get Isaac ROS node configuration
+      parameters:
+        - name: nodeId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "vslam_node"
+          description: The node identifier
+      responses:
+        '200':
+          description: Isaac ROS node configuration retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IsaacROSNode'
+        '404':
+          description: Node not found
+
+components:
+  schemas:
+    Chapter:
+      type: object
+      required:
+        - id
+        - title
+        - content
+        - sections
+      properties:
+        id:
+          type: string
+          description: Unique chapter identifier for chatbot retrieval
+        title:
+          type: string
+          description: Chapter title
+        content:
+          type: string
+          description: Chapter overview content in Markdown
+        sections:
+          type: array
+          items:
+            $ref: '#/components/schemas/Section'
+        learningOutcomes:
+          type: array
+          items:
+            type: string
+          description: What students should learn from this chapter
+        simulationExamples:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimulationExample'
+
+    Section:
+      type: object
+      required:
+        - id
+        - title
+        - content
+      properties:
+        id:
+          type: string
+          description: Unique section identifier for chatbot retrieval
+        title:
+          type: string
+          description: Section title
+        content:
+          type: string
+          description: Section content in Markdown format
+        diagramDescriptions:
+          type: array
+          items:
+            type: string
+          description: Text descriptions of diagrams in the section
+        keyConcepts:
+          type: array
+          items:
+            type: string
+          description: Important concepts covered in the section
+
+    SimulationExample:
+      type: object
+      required:
+        - id
+        - title
+        - type
+        - description
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the simulation example
+        title:
+          type: string
+          description: Brief description of the example
+        type:
+          type: string
+          description: Type of simulation
+          enum: [isaac-sim, isaac-ros, nav2, combined]
+        description:
+          type: string
+          description: Explanation of what the simulation demonstrates
+        expectedOutput:
+          type: string
+          description: What the simulation should produce when run
+        prerequisites:
+          type: array
+          items:
+            type: string
+          description: What needs to be set up before running
+        files:
+          type: array
+          items:
+            type: string
+          description: List of files that make up the simulation
+        setupInstructions:
+          type: string
+          description: Step-by-step setup instructions
+
+    IsaacSimEnvironment:
+      type: object
+      required:
+        - name
+        - description
+        - assets
+      properties:
+        name:
+          type: string
+          description: Name of the Isaac Sim environment
+        description:
+          type: string
+          description: Purpose and characteristics of the environment
+        assets:
+          type: array
+          items:
+            type: string
+          description: List of 3D assets included in the environment
+        lightingSettings:
+          type: object
+          description: Configuration for lighting and materials
+        physicsProperties:
+          type: object
+          description: Physics simulation parameters
+        domainRandomization:
+          type: object
+          description: Parameters for domain randomization
+
+    IsaacROSNode:
+      type: object
+      required:
+        - name
+        - type
+        - inputTopics
+        - outputTopics
+      properties:
+        name:
+          type: string
+          description: Name of the Isaac ROS node
+        type:
+          type: string
+          description: Type of perception node
+          enum: [vslam, object_detection, depth_estimation, segmentation]
+        inputTopics:
+          type: array
+          items:
+            type: string
+          description: ROS topics the node subscribes to
+        outputTopics:
+          type: array
+          items:
+            type: string
+          description: ROS topics the node publishes to
+        parameters:
+          type: object
+          description: Configuration parameters for the node
+        hardwareRequirements:
+          type: object
+          description: GPU and compute requirements

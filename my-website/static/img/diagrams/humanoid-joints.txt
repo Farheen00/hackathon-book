@@ -1,0 +1,58 @@
+# Humanoid Robot Joint Structure Diagram
+
+## Description
+This diagram illustrates the joint structure and degrees of freedom in a humanoid robot model.
+
+## Visual Elements
+1. **Torso/Body**:
+   - Central rectangular body with head on top
+   - "Base Link" as main reference frame
+
+2. **Head Joint**:
+   - "Neck Joint" connecting head to torso
+   - Degrees of freedom: pitch, yaw, roll
+   - Range of motion indicators
+
+3. **Left Arm Structure**:
+   - "Left Shoulder Joint" (3 DOF: pitch, yaw, roll)
+   - "Left Elbow Joint" (1 DOF: pitch)
+   - "Left Wrist Joint" (2-3 DOF: pitch, yaw, sometimes roll)
+   - "Left Hand" end effector
+
+4. **Right Arm Structure** (symmetric to left):
+   - "Right Shoulder Joint" (3 DOF)
+   - "Right Elbow Joint" (1 DOF)
+   - "Right Wrist Joint" (2-3 DOF)
+   - "Right Hand" end effector
+
+5. **Left Leg Structure**:
+   - "Left Hip Joint" (3 DOF: pitch, yaw, roll)
+   - "Left Knee Joint" (1 DOF: pitch)
+   - "Left Ankle Joint" (2 DOF: pitch, roll)
+   - "Left Foot" end effector
+
+6. **Right Leg Structure** (symmetric to left):
+   - "Right Hip Joint" (3 DOF)
+   - "Right Knee Joint" (1 DOF)
+   - "Right Ankle Joint" (2 DOF)
+   - "Right Foot" end effector
+
+7. **Joint Type Indicators**:
+   - Revolute joints shown with rotation arrows
+   - Range of motion limits indicated with angle brackets
+   - Fixed connections where appropriate
+
+8. **Coordinate Frames**:
+   - X: Forward direction
+   - Y: Lateral direction
+   - Z: Upward direction
+   - Frame orientation for each joint
+
+## Key Relationships
+- Total DOF typically ranges from 20-40 for full humanoid
+- Arms usually have 6-7 DOF each
+- Legs usually have 6 DOF each
+- Head has 3 DOF for orientation
+- Joint limits prevent self-collision and ensure physical feasibility
+- Kinematic chains enable reaching and locomotion
+- Symmetric design for left/right limbs

@@ -1,0 +1,49 @@
+# URDF Structure Diagram
+
+## Description
+This diagram shows the hierarchical structure of a URDF (Unified Robot Description Format) file for robot modeling.
+
+## Visual Elements
+1. **Root Element**:
+   - "Robot" container box at the top
+   - Contains robot name attribute
+
+2. **Link Elements** (vertical stack):
+   - "Link: base_link" box with sub-elements:
+     - "Visual" (shape, color, material)
+     - "Collision" (collision geometry)
+     - "Inertial" (mass, center of mass, inertia tensor)
+   - "Link: link2" box with same structure
+   - "Link: link3" box with same structure
+
+3. **Joint Elements** (connecting links):
+   - "Joint: joint1" box connecting base_link to link2:
+     - "Type: revolute" (or other joint type)
+     - "Parent: base_link"
+     - "Child: link2"
+     - "Origin" (position and orientation)
+     - "Axis" (rotation axis for revolute joints)
+     - "Limits" (for revolute/prismatic joints)
+   - "Joint: joint2" box connecting link2 to link3
+
+4. **Hierarchical Tree Structure**:
+   - Tree-like connection showing parent-child relationships
+   - Base link as root, other links as branches
+   - Joint elements as connections between nodes
+
+5. **Additional Elements**:
+   - "Material" definitions (shared across links)
+   - "Transmission" elements (for actuator control)
+   - "Gazebo" elements (for simulation-specific properties)
+
+6. **Example Robot Configuration**:
+   - Visualization of how links and joints form a physical robot
+   - Kinematic chain from base to end effectors
+
+## Key Relationships
+- Links represent rigid bodies of the robot
+- Joints define how links move relative to each other
+- Kinematic tree has single root (base link) with branches
+- Each joint connects exactly two links
+- URDF describes both visual appearance and physical properties
+- Structure enables simulation, visualization, and motion planning

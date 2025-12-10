@@ -1,0 +1,169 @@
+openapi: 3.0.0
+info:
+  title: Book Content API
+  description: API for accessing book content with section IDs for chatbot retrieval
+  version: 1.0.0
+servers:
+  - url: https://api.your-book-domain.com/v1
+    description: Production server
+
+paths:
+  /content/module/{moduleId}:
+    get:
+      summary: Get content for a specific module
+      parameters:
+        - name: moduleId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "001-ros2-fundamentals"
+          description: The module identifier
+      responses:
+        '200':
+          description: Module content retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  moduleId:
+                    type: string
+                  title:
+                    type: string
+                  chapters:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Chapter'
+        '404':
+          description: Module not found
+
+  /content/chapter/{chapterId}:
+    get:
+      summary: Get content for a specific chapter
+      parameters:
+        - name: chapterId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "ch1-ros-nodes"
+          description: The chapter identifier
+      responses:
+        '200':
+          description: Chapter content retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Chapter'
+        '404':
+          description: Chapter not found
+
+  /content/section/{sectionId}:
+    get:
+      summary: Get content for a specific section
+      parameters:
+        - name: sectionId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "ch1-s1-nodes-intro"
+          description: The section identifier
+      responses:
+        '200':
+          description: Section content retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Section'
+        '404':
+          description: Section not found
+
+components:
+  schemas:
+    Chapter:
+      type: object
+      required:
+        - id
+        - title
+        - content
+        - sections
+      properties:
+        id:
+          type: string
+          description: Unique chapter identifier for chatbot retrieval
+        title:
+          type: string
+          description: Chapter title
+        content:
+          type: string
+          description: Chapter overview content in Markdown
+        sections:
+          type: array
+          items:
+            $ref: '#/components/schemas/Section'
+        learningOutcomes:
+          type: array
+          items:
+            type: string
+          description: What students should learn from this chapter
+        codeExamples:
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeExample'
+
+    Section:
+      type: object
+      required:
+        - id
+        - title
+        - content
+      properties:
+        id:
+          type: string
+          description: Unique section identifier for chatbot retrieval
+        title:
+          type: string
+          description: Section title
+        content:
+          type: string
+          description: Section content in Markdown format
+        diagramDescriptions:
+          type: array
+          items:
+            type: string
+          description: Text descriptions of diagrams in the section
+        keyConcepts:
+          type: array
+          items:
+            type: string
+          description: Important concepts covered in the section
+
+    CodeExample:
+      type: object
+      required:
+        - id
+        - title
+        - language
+        - code
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the example
+        title:
+          type: string
+          description: Brief description of the example
+        language:
+          type: string
+          description: Programming language
+          enum: [python, xml, bash, markdown]
+        code:
+          type: string
+          description: The actual code content
+        description:
+          type: string
+          description: Explanation of what the code does
+        expectedOutput:
+          type: string
+          description: What the code should produce when run

@@ -1,0 +1,35 @@
+# ROS 2 Services Communication Diagram
+
+## Description
+This diagram illustrates the request-response communication pattern in ROS 2 using services.
+
+## Visual Elements
+1. **Service Client**: Left-side box labeled "Service Client" containing:
+   - "Client Object"
+   - Request creation process
+   - Arrow pointing to service
+
+2. **Service Server**: Right-side box labeled "Service Server" containing:
+   - "Service Object"
+   - Request processing function
+   - Response creation process
+   - Arrow from service to client
+
+3. **Service Interface**: Central element labeled "Service: /add_two_ints" with:
+   - Request message structure (a: int64, b: int64)
+   - Response message structure (sum: int64)
+
+4. **Message Flow**:
+   - Arrow from Client to Server: "Request: a=2, b=3"
+   - Arrow from Server to Client: "Response: sum=5"
+   - Synchronous communication indicator (dotted lines showing request-response correlation)
+
+5. **DDS Infrastructure**: Background layer showing the middleware that handles request-response matching
+
+## Key Relationships
+- Service client sends a request and waits for a response
+- Service server processes the request and returns a response
+- Communication is synchronous (client blocks until response received)
+- Service interface defines both request and response message types
+- One service server can handle requests from multiple clients sequentially
+- Client and server must agree on service type and interface

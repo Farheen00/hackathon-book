@@ -1,0 +1,8 @@
+{
+  "label": "Chapter 2: Python-to-ROS Control Bridge",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Learn how to bridge Python agents to ROS controllers using rclpy."
+  }
+}

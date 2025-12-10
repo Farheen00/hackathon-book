@@ -1,55 +1,40 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report:
+- Version change: N/A → 1.0.0 (initial constitution)
+- Added sections: All principles and governance sections
+- Templates requiring updates: N/A (initial creation)
+- Follow-up TODOs: None
+-->
+
+# Physical AI & Humanoid Robotics Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### Technical Accuracy First
+All technical content must match official documentation from ROS 2, Gazebo, Isaac, Unity, and OpenAI APIs. No speculative or unverified technical claims are permitted. This ensures readers receive reliable, actionable information that matches current industry standards.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### Educational Clarity
+All content must be written at a grade 10-12 reading level with clear textbook-style explanations. Complex concepts should be broken down into digestible sections with practical examples. This ensures accessibility for a broad range of readers.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### Runnable Code Standards
+All code examples must be tested and runnable in the specified technology stack (ROS 2 + Python + OpenAI SDK). Code must include proper error handling, documentation, and be ready for direct implementation. This ensures practical value for readers.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### RAG Integrity
+The embedded chatbot must strictly answer from book content or user-selected text only, with zero hallucination tolerance. All responses must cite specific section IDs for verification. This maintains trust and accuracy in the AI assistance.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### Multi-Platform Integration
+All systems must demonstrate integration across the specified platforms (ROS 2, Gazebo, Unity, Isaac) with clear connection points and compatibility. This ensures comprehensive coverage of the physical AI ecosystem.
 
-### [PRINCIPLE_6_NAME]
+### Deployment Reliability
+All components must deploy successfully to specified platforms (Book → GitHub Pages; Backend → Vercel/Fly.io) with proper error handling and monitoring. This ensures accessibility and maintainability.
 
+## Technical Standards
+All implementations must follow the specified technology stack: Docusaurus for book format, FastAPI for backend, Neon for database, Qdrant for vector storage, and OpenAI Agents for RAG functionality. All diagrams require text descriptions for accessibility compliance.
 
-[PRINCIPLE__DESCRIPTION]
-
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
-
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
-
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
-
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+## Development Workflow
+All features must be testable with clear acceptance criteria. Each module must include runnable code examples, integration tests, and deployment validation. Code reviews must verify compliance with all constitution principles before approval.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+This constitution supersedes all other practices and guidelines for this project. All pull requests and code reviews must verify compliance with these principles. Any changes to this constitution require explicit approval and documentation of the reasoning.
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
-
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2025-12-09 | **Last Amended**: 2025-12-09

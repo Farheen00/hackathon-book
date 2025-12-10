@@ -1,0 +1,224 @@
+openapi: 3.0.0
+info:
+  title: Simulation Content API
+  description: API for accessing simulation content with section IDs for chatbot retrieval
+  version: 1.0.0
+servers:
+  - url: https://api.your-book-domain.com/v1
+    description: Production server
+
+paths:
+  /content/module/{moduleId}:
+    get:
+      summary: Get content for a specific module
+      parameters:
+        - name: moduleId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "002-gazebo-unity-digital-twin"
+          description: The module identifier
+      responses:
+        '200':
+          description: Module content retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  moduleId:
+                    type: string
+                  title:
+                    type: string
+                  chapters:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Chapter'
+        '404':
+          description: Module not found
+
+  /content/chapter/{chapterId}:
+    get:
+      summary: Get content for a specific chapter
+      parameters:
+        - name: chapterId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "ch2-gazebo-physics"
+          description: The chapter identifier
+      responses:
+        '200':
+          description: Chapter content retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Chapter'
+        '404':
+          description: Chapter not found
+
+  /content/section/{sectionId}:
+    get:
+      summary: Get content for a specific section
+      parameters:
+        - name: sectionId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "ch2-s1-physics-worlds"
+          description: The section identifier
+      responses:
+        '200':
+          description: Section content retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Section'
+        '404':
+          description: Section not found
+
+  /content/simulation-example/{exampleId}:
+    get:
+      summary: Get simulation example content
+      parameters:
+        - name: exampleId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "gazebo-simple-physics"
+          description: The simulation example identifier
+      responses:
+        '200':
+          description: Simulation example content retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimulationExample'
+        '404':
+          description: Simulation example not found
+
+components:
+  schemas:
+    Chapter:
+      type: object
+      required:
+        - id
+        - title
+        - content
+        - sections
+      properties:
+        id:
+          type: string
+          description: Unique chapter identifier for chatbot retrieval
+        title:
+          type: string
+          description: Chapter title
+        content:
+          type: string
+          description: Chapter overview content in Markdown
+        sections:
+          type: array
+          items:
+            $ref: '#/components/schemas/Section'
+        learningOutcomes:
+          type: array
+          items:
+            type: string
+          description: What students should learn from this chapter
+        simulationExamples:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimulationExample'
+
+    Section:
+      type: object
+      required:
+        - id
+        - title
+        - content
+      properties:
+        id:
+          type: string
+          description: Unique section identifier for chatbot retrieval
+        title:
+          type: string
+          description: Section title
+        content:
+          type: string
+          description: Section content in Markdown format
+        diagramDescriptions:
+          type: array
+          items:
+            type: string
+          description: Text descriptions of diagrams in the section
+        keyConcepts:
+          type: array
+          items:
+            type: string
+          description: Important concepts covered in the section
+
+    SimulationExample:
+      type: object
+      required:
+        - id
+        - title
+        - type
+        - description
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the simulation example
+        title:
+          type: string
+          description: Brief description of the example
+        type:
+          type: string
+          description: Type of simulation
+          enum: [gazebo, unity, sensor, combined]
+        description:
+          type: string
+          description: Explanation of what the simulation demonstrates
+        expectedOutput:
+          type: string
+          description: What the simulation should produce when run
+        prerequisites:
+          type: array
+          items:
+            type: string
+          description: What needs to be set up before running
+        files:
+          type: array
+          items:
+            type: string
+          description: List of files that make up the simulation
+        setupInstructions:
+          type: string
+          description: Step-by-step setup instructions
+
+    SensorData:
+      type: object
+      required:
+        - sensorType
+        - timestamp
+        - frameId
+        - data
+      properties:
+        sensorType:
+          type: string
+          description: Type of sensor (lidar, depth, imu)
+        timestamp:
+          type: number
+          description: Timestamp of the data
+        frameId:
+          type: string
+          description: Coordinate frame of the data
+        data:
+          type: object
+          description: The actual sensor data in appropriate format
+        format:
+          type: string
+          description: Data format (e.g., "PointCloud2", "Image", "Imu")
