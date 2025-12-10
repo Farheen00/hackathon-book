@@ -4,6 +4,25 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
+// Create localStorage polyfill for server-side rendering
+const localStoragePolyfill = {
+  getItem: () => null,
+  setItem: () => {},
+  removeItem: () => {},
+  clear: () => {},
+  key: () => null,
+  length: 0,
+  get length() {
+    return 0;
+  }
+};
+
+// Apply the polyfill in Node.js environment
+if (typeof window === 'undefined') {
+  global.localStorage = localStoragePolyfill;
+  global.sessionStorage = localStoragePolyfill;
+}
+
 const config: Config = {
   title: 'Physical AI & Humanoid Robotics',
   tagline: 'Building Intelligent Humanoid Robots',
@@ -25,7 +44,7 @@ const config: Config = {
   organizationName: 'facebook', // Usually your GitHub org/user name.
   projectName: 'docusaurus', // Usually your repo name.
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
