@@ -1,0 +1,13 @@
+[project]
+name = "backend-rag-pipeline"
+version = "0.1.0"
+description = "RAG pipeline for extracting text from Docusaurus URLs, generating embeddings with Cohere, and storing in Qdrant"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "qdrant-client>=1.9.0",
+    "cohere>=4.0.0",
+    "requests>=2.31.0",
+    "beautifulsoup4>=4.12.0",
+    "python-dotenv>=1.0.0",
+]

@@ -6,6 +6,7 @@ import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 
 import styles from './index.module.css';
+import ChatUI from '../components/ChatUI';
 
 function HomepageHeader() {
   return (
@@ -97,6 +98,8 @@ export default function Home(): ReactNode {
       <main>
         <ModulesOverview />
       </main>
+
+       <ChatUI />
     </Layout>
   );
 }
