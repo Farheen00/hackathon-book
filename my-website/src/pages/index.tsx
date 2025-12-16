@@ -24,13 +24,6 @@ function HomepageHeader() {
             to="/docs/module-1-ros2-fundamentals">
             Start Learning
           </Link>
-
-          <Link
-            className="button button--primary button--lg"
-            to="/chatbot"
-            style={{ marginLeft: '1rem' }}>
-            Open RAG Chatbot
-          </Link>
         </div>
       </div>
     </header>
@@ -96,23 +89,6 @@ function ModulesOverview() {
   );
 }
 
-function ChatbotSection() {
-  return (
-    <section className={styles.chatbotSection} id="chatbot-section">
-      <div className="container padding-vert--lg">
-        <div className="row">
-          <div className="col col--12 text--center">
-            <Heading as="h2">RAG Chatbot</Heading>
-            <p>Ask questions about any part of the book using our RAG Chatbot</p>
-            <Link className="button button--primary button--lg" to="/chatbot">
-              Open Chatbot
-            </Link>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 export default function Home(): ReactNode {
   return (
@@ -120,7 +96,6 @@ export default function Home(): ReactNode {
       <HomepageHeader />
       <main>
         <ModulesOverview />
-        <ChatbotSection />
       </main>
     </Layout>
   );

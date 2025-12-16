@@ -34,7 +34,7 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
+  url: 'https://your-vercel-project-name.vercel.app', // Replace with your actual Vercel URL
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -114,11 +114,6 @@ const config: Config = {
           ],
         },
         {
-          to: '/chatbot',
-          label: 'Chatbot',
-          position: 'left',
-        },
-        {
           href: 'https://github.com/facebook/docusaurus',
           label: 'GitHub',
           position: 'right',
@@ -155,10 +150,6 @@ const config: Config = {
             {
               label: 'Capstone',
               to: '/docs/capstone',
-            },
-            {
-              label: 'RAG Chatbot',
-              to: '/chatbot',
             },
           ],
         },
