@@ -1,4 +1,4 @@
-import type {ReactNode} from 'react';
+import type { ReactNode } from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
@@ -54,24 +54,20 @@ function ModulesOverview() {
       title: 'Module 4: VLA Systems',
       description:
         'Explore Vision-Language-Action systems for advanced robotic perception.',
-      link: '/docs/tutorial-basics/module-4-vla-integration', // Corrected path
+      link: '/docs/tutorial-basics/module-4-vla-integration',
     },
-   
   ];
 
   return (
     <section className={styles.modulesOverview} id="modules-overview">
       <div className="container padding-vert--lg">
+        <Heading as="h2" className="text--center margin-bottom--lg">
+          Modules Overview
+        </Heading>
+
         <div className="row">
-          <div className="col col--12">
-            <Heading as="h2" className="text--center margin-bottom--lg">
-              Modules Overview
-            </Heading>
-          </div>
-        </div>
-        <div className="row">
-          {modules.map((module, index) => (
-            <div className="col col--4 margin-bottom--lg" key={index}>
+          {modules.map((module) => (
+            <div className="col col--4 margin-bottom--lg" key={module.title}>
               <div className="card">
                 <div className="card__body text--center">
                   <Heading as="h3">{module.title}</Heading>
