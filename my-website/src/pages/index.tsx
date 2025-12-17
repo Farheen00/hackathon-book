@@ -1,7 +1,6 @@
 import type {ReactNode} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 
@@ -18,11 +17,11 @@ function HomepageHeader() {
         <p className="hero__subtitle">
           A Complete Guide to Embodied Intelligence, Digital Twins, and Humanoid Robot Control
         </p>
-
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/module-1-ros2-fundamentals">
+            to="/docs/module-1-ros2-fundamentals"
+          >
             Start Learning
           </Link>
         </div>
@@ -35,29 +34,29 @@ function ModulesOverview() {
   const modules = [
     {
       title: 'Module 1: ROS 2',
-      description: 'Learn the fundamentals of Robot Operating System 2 for building robotic applications.',
+      description:
+        'Learn the fundamentals of Robot Operating System 2 for building robotic applications.',
       link: '/docs/module-1-ros2-fundamentals',
     },
     {
       title: 'Module 2: Digital Twin',
-      description: 'Understand how to create and work with digital twin systems for robotics.',
+      description:
+        'Understand how to create and work with digital twin systems for robotics.',
       link: '/docs/module-2-digital-twin',
     },
     {
       title: 'Module 3: NVIDIA Isaac',
-      description: 'Master NVIDIA Isaac for AI-powered robotic control and simulation.',
+      description:
+        'Master NVIDIA Isaac for AI-powered robotic control and simulation.',
       link: '/docs/module-3-isaac-ai-brain',
     },
     {
       title: 'Module 4: VLA Systems',
-      description: 'Explore Vision-Language-Action systems for advanced robotic perception.',
-      link: '/docs/tutorial-basics/module-4-vla-integration',
+      description:
+        'Explore Vision-Language-Action systems for advanced robotic perception.',
+      link: '/docs/tutorial-basics/module-4-vla-integration', // Corrected path
     },
-    {
-      title: 'Capstone Project',
-      description: 'Apply your knowledge in a comprehensive humanoid robotics project.',
-      link: '/docs/capstone',
-    },
+   
   ];
 
   return (
@@ -77,7 +76,10 @@ function ModulesOverview() {
                 <div className="card__body text--center">
                   <Heading as="h3">{module.title}</Heading>
                   <p>{module.description}</p>
-                  <Link to={module.link} className="button button--primary button--block">
+                  <Link
+                    to={module.link}
+                    className="button button--primary button--block"
+                  >
                     Explore
                   </Link>
                 </div>
@@ -90,7 +92,6 @@ function ModulesOverview() {
   );
 }
 
-
 export default function Home(): ReactNode {
   return (
     <Layout title="Physical AI & Humanoid Robotics">
@@ -98,8 +99,7 @@ export default function Home(): ReactNode {
       <main>
         <ModulesOverview />
       </main>
-
-       <ChatUI />
+      <ChatUI />
     </Layout>
   );
 }
